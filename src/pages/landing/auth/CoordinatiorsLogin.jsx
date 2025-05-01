@@ -26,7 +26,7 @@ const CoordinatorsLogin = () => {
     };
 
     return (
-        <section className='w-full p-8 flex items-center gap-4 justify-center'>
+        <section className='w-full p-8 flex items-center gap-4 justify-center mt-32'>
             <div className='w-[500px] h-full'>
                 <form onSubmit={submitHandler}>
                     <h2 className='text-3xl font-clemente_regular font-[500] text-zinc-800 mb-4'>Coordinators Login</h2>

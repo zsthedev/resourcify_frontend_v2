@@ -62,19 +62,23 @@
   --font-clemente_semibold: clemente_semibold;
   --font-clemente_bold: clemente_bold;
   --font-clemente_book: clemente_book;
-
 }
 
 body {
   font-family: "Poppins";
 }
 
-.primary_btn {
-  @apply text-base px-4 py-3 bg-accent text-white rounded-md  font-[500] cursor-pointer hover:bg-accent_dark transition duration-200 ease-in-out;
+.primary_btn,
+.primary-btn {
+  @apply text-base px-5 py-3 bg-accent text-white rounded-lg font-medium cursor-pointer 
+         transition duration-300 ease-in-out shadow-md hover:shadow-lg hover:scale-[1.03] 
+         hover:bg-accent_dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent;
 }
 
 .sec_btn {
-  @apply text-base px-4 py-3 bg-zinc-800 text-white rounded-md font-[500] cursor-pointer hover:bg-zinc-700 transition duration-200 ease-in-out;
+  @apply text-base px-5 py-3 bg-zinc-800 text-white rounded-lg font-medium cursor-pointer 
+         transition duration-300 ease-in-out shadow-md hover:shadow-lg hover:scale-[1.03] 
+         hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-600;
 }
 
 form {
@@ -113,4 +117,8 @@ table {
   td {
     @apply text-zinc-700;
   }
+}
+
+h1 {
+  @apply font-clemente_bold text-3xl lg:text-5xl text-center text-black;
 }

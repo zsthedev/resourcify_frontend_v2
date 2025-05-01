@@ -2,14 +2,19 @@ import { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import Logo from './partials/Logo';
 import { IoIosArrowDown } from "react-icons/io";
-
+import { IoMdLogOut } from "react-icons/io";
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../redux/actions/user';
 const Sidebar = ({ routes, component: Component, pageTitle }) => {
     const location = useLocation();
     const [openIndex, setOpenIndex] = useState(null);
+    const { user, isAuthenticated } = useSelector(state => state.user)
 
     const toggle = (index) => {
         setOpenIndex(openIndex === index ? null : index);
     };
+
+    const dispatch = useDispatch()
 
     return (
         <section className='w-full min-h-screen bg-zinc-100 flex items-center justify-center'>
@@ -79,18 +84,24 @@ const Sidebar = ({ routes, component: Component, pageTitle }) => {
                 </div>
 
                 <div className='w-full'>
-                    <div className='flex items-center gap-2'>
-                        <img src="https://placehold.co/64x64" alt="" className='w-[64px] h-[64px] rounded-full object-cover object-center' />
-                        <div>
-                            <p className='text-base text-zinc-800 font-semibold'>Shahzaib Khan</p>
-                            <p className='text-sm font-semibold text-accent'>Student</p>
+                    <div className='flex items-center justify-between'>
+                        <div className='flex items-center gap-2'>
+                            <img src="https://placehold.co/64x64" alt="" className='w-[64px] h-[64px] rounded-full object-cover object-center' />
+                            <div>
+                                <p className='text-base text-zinc-800 font-semibold'>{isAuthenticated && user?.name}</p>
+                                <p className='text-sm font-semibold text-accent capitalize'>{isAuthenticated && user?.role}</p>
+                            </div>
+
+
                         </div>
+
+                        <button onClick={() => { dispatch(logout()) }} className='text-2xl cursor-pointer'><IoMdLogOut /></button>
                     </div>
                 </div>
             </div>
 
             <div className="main flex-1 ml-[300px] min-h-screen p-8">
-                <div className="header w-full bg-white h-20 rounded-lg flex items-center p-4">
+                <div className="header w-full bg-white h-20 rounded-lg flex items-center p-4 mb-3">
                     <p className='text-lg font-medium text-zinc-800'>{pageTitle}</p>
                 </div>
                 {Component && <Component />}

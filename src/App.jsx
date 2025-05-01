@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { auth, landing, librarianRoutes, studentRoutes, teacherRoutes } from './routes'
+import { auth, labAttendantRoutes, landing, librarianRoutes, studentRoutes, teacherRoutes } from './routes'
 import Navbar from './components/partials/Navbar'
-import { librarianSidebarRoutes, studentSidebarRoutes, teacherSidebarRoutes } from './routes/sidebar'
+import { labAttendantSidebarRoutes, librarianSidebarRoutes, studentSidebarRoutes, teacherSidebarRoutes } from './routes/sidebar'
 import Sidebar from './components/Sidebar'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadUser } from './redux/actions/user'
@@ -35,7 +35,11 @@ const App = () => {
           <Route
             key={index}
             path={route.path}
-            element={<route.element />}
+            element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect={
+              user && user.role === "student" ? "/student/library_items" : user && user.role === "teacher" ? "/teacher/library_items" : user && user.role === "librarian" ? "/librarian/library" : "/lab_attendant/resources"
+            }>
+              <route.element routes={studentSidebarRoutes} />
+            </ProtectedRoute>}
           />
         ))}
 
@@ -44,7 +48,7 @@ const App = () => {
             key={index}
             path={route.path}
             element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect={
-              user && user.role === "student" ? "/student/library_items" : user && user.role === "teacher" ? "/teacher/library_items" : "/librarian/library"
+              user && user.role === "student" ? "/student/library_items" : user && user.role === "teacher" ? "/teacher/library_items" : user && user.role === "librarian" ? "/librarian/library" : "/lab_attendant/resources"
             }>
               <route.element routes={studentSidebarRoutes} />
             </ProtectedRoute>}
@@ -55,7 +59,7 @@ const App = () => {
           <Route
             key={index}
             path={route.path}
-            element={<ProtectedRoute isAuthenticated={isAuthenticated && user && user?.role === "student"} redirect={"/academia_login"}>
+            element={<ProtectedRoute isAuthenticated={isAuthenticated && user && user?.role === "student"} redirect={"/academia/login"}>
               <Sidebar routes={studentSidebarRoutes} component={route.element} pageTitle={route.title} />
             </ProtectedRoute>}
           />
@@ -65,7 +69,7 @@ const App = () => {
           <Route
             key={index}
             path={route.path}
-            element={<ProtectedRoute isAuthenticated={isAuthenticated && user && user?.role == "teacher"} redirect={"/academia_login"}>
+            element={<ProtectedRoute isAuthenticated={isAuthenticated && user && user?.role == "teacher"} redirect={"/academia/login"}>
               <Sidebar routes={teacherSidebarRoutes} component={route.element} pageTitle={route.title} />
             </ProtectedRoute>}
           />
@@ -76,8 +80,18 @@ const App = () => {
           <Route
             key={index}
             path={route.path}
-            element={<ProtectedRoute isAuthenticated={isAuthenticated && user && user?.role == "librarian"} redirect={"/academia_login"}>
+            element={<ProtectedRoute isAuthenticated={isAuthenticated && user && user?.role == "librarian"} redirect={"/coordinators/login"}>
               <Sidebar routes={librarianSidebarRoutes} component={route.element} pageTitle={route.title} />
+            </ProtectedRoute>}
+          />
+        ))}
+
+        {labAttendantRoutes.map((route, index) => (
+          <Route
+            key={index}
+            path={route.path}
+            element={<ProtectedRoute isAuthenticated={isAuthenticated && user && user?.role == "lab_attendant"} redirect={"/coordinators/login"}>
+              <Sidebar routes={labAttendantSidebarRoutes} component={route.element} pageTitle={route.title} />
             </ProtectedRoute>}
           />
         ))}

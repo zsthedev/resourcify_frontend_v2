@@ -7,7 +7,7 @@ const Facility = ({ icon: Icon, title, description }) => {
                 <Icon className="text-white text-4xl" />
             </div>
             <div className="text">
-                <h3 className="text-2xl font-clemente-regular line-clamp-1">{title}</h3>
+                <h3 className="text-2xl font-clemente_regular line-clamp-1">{title}</h3>
                 <p className="line-clamp-2">{description}</p>
             </div>
 

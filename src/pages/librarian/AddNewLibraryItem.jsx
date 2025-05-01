@@ -6,6 +6,7 @@ import { libraryItemCategories } from "../../utils/selectOptions";
 import Loading from "../other/Loading";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { styles } from "../../select/styles";
 
 const AddNewLibraryItem = () => {
   const { loading, error, message } = useSelector((state) => state.library);

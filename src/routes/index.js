@@ -1,6 +1,9 @@
 import Sidebar from "../components/Sidebar";
 import LabResourceBooking from "../pages/academia/LabResourceBooking";
 import LibraryItemBooking from "../pages/academia/LibraryItemBooking";
+import AddLabResoruce from "../pages/lab_attendant/AddLabResoruce";
+import AllLabResourcesRequests from "../pages/lab_attendant/AllLabResourcesRequests";
+import UpdateLabResource from "../pages/lab_attendant/UpdateLabResource";
 import AcademiaLogin from "../pages/landing/auth/AcademiaLogin";
 import CoordinatorsLogin from "../pages/landing/auth/CoordinatiorsLogin";
 import Profile from "../pages/landing/auth/Profile";
@@ -18,7 +21,7 @@ import LabResources from "../pages/student/LabResources";
 import LibraryItems from "../pages/student/LibraryItems";
 import MyResources from "../pages/student/MyResources";
 import { updateLibraryItem } from "../redux/actions/library";
-
+import LabAttendantLabResources from "../pages/lab_attendant/LabAttendantLabResources";
 export const landing = [
   {
     path: "/",
@@ -29,13 +32,13 @@ export const landing = [
 
 export const auth = [
   {
-    path: "/academia_login",
+    path: "/academia/login",
     element: AcademiaLogin,
     title: "Academia Login",
   },
 
   {
-    path: "/coordinators_login",
+    path: "/coordinators/login",
     element: CoordinatorsLogin,
     title: "Academia Login",
   },
@@ -161,7 +164,7 @@ export const librarianRoutes = [
   },
 
   {
-    path: "/librarian/requests",
+    path: "/librarian/library/requests",
     title: "Requests",
     element: AllLentItemsRequests,
   },
@@ -190,6 +193,37 @@ export const librarianRoutes = [
     element: AllBookings,
   },
 
+  {
+    title: "Profile",
+    path: "/me",
+    element: Profile,
+  },
+];
+
+export const labAttendantRoutes = [
+  {
+    path: "/lab_attendant/resources",
+    title: "Lab Resources",
+    element: LabAttendantLabResources,
+  },
+
+  {
+    path: "/lab_attendant/resource/add",
+    title: "Add Lab Resource",
+    element: AddLabResoruce,
+  },
+
+  {
+    path: "/lab_attendant/resource/requests",
+    title: "Lab Resources Requests",
+    element: AllLabResourcesRequests,
+  },
+
+  {
+    path: "/lab_attendant/resource/:id/update",
+    title: "Update Lab Resource",
+    element: UpdateLabResource,
+  },
   {
     title: "Profile",
     path: "/me",

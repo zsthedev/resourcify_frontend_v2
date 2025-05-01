@@ -137,3 +137,29 @@ export const librarianSidebarRoutes = [
     ],
   },
 ];
+
+export const labAttendantSidebarRoutes = [
+  {
+    title: "Lab Resources",
+    icon: RiDashboardLine,
+    isExtended: true,
+    subRoutes: [
+      {
+        label: "View All",
+        value: "/lab_attendant/resources",
+        icon: RiDashboardLine,
+      },
+      {
+        label: "Add New Resource",
+        value: "/lab_attendant/resource/add",
+        icon: RiDashboardLine,
+      },
+
+      {
+        label: "Requests",
+        value: "/lab_attendant/resource/requests",
+        icon: RiDashboardLine,
+      },
+    ],
+  },
+];
